@@ -1,0 +1,28 @@
+body {background:url("images/balloon.jpg")no-repeat;max-width:200%;
+      background-color:#6699cc;
+      margin-top:20px;
+   
+}
+
+#header{
+font-family:"arial"; 
+      background-color:#6699cc;
+      color:green;
+      border-bottom:5px dotted black;
+      
+}
+
+td 
+{
+	height:30px;
+	margin:0px auto;
+
+}
+
+h3{color:Red;}
+.error{
+	color:red;
+	font-weight:bolder; 
+	border: 2px yellow dotted;}
+
+	
