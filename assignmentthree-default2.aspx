@@ -13,7 +13,7 @@
     </div>
     <asp:SqlDataSource ID="dsPerson" runat="server" 
         ConflictDetection="CompareAllValues" 
-        ConnectionString="<%$ ConnectionStrings:connCommunityAssist %>" 
+        ConnectionString="<%$ ConnectionStrings:CommunityAssistConnectionString %>" 
         DeleteCommand="DELETE FROM [Person] WHERE [PersonKey] = @original_PersonKey AND [PersonLastName] = @original_PersonLastName AND (([PersonFirstName] = @original_PersonFirstName) OR ([PersonFirstName] IS NULL AND @original_PersonFirstName IS NULL)) AND (([PersonUsername] = @original_PersonUsername) OR ([PersonUsername] IS NULL AND @original_PersonUsername IS NULL)) AND (([PersonPlainPassword] = @original_PersonPlainPassword) OR ([PersonPlainPassword] IS NULL AND @original_PersonPlainPassword IS NULL)) AND (([Personpasskey] = @original_Personpasskey) OR ([Personpasskey] IS NULL AND @original_Personpasskey IS NULL)) AND (([PersonEntryDate] = @original_PersonEntryDate) OR ([PersonEntryDate] IS NULL AND @original_PersonEntryDate IS NULL)) AND (([PersonUserPassword] = @original_PersonUserPassword) OR ([PersonUserPassword] IS NULL AND @original_PersonUserPassword IS NULL))" 
         InsertCommand="INSERT INTO [Person] ([PersonLastName], [PersonFirstName], [PersonUsername], [PersonPlainPassword], [Personpasskey], [PersonEntryDate], [PersonUserPassword]) VALUES (@PersonLastName, @PersonFirstName, @PersonUsername, @PersonPlainPassword, @Personpasskey, @PersonEntryDate, @PersonUserPassword)" 
         OldValuesParameterFormatString="original_{0}" 
@@ -40,7 +40,7 @@
         
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="dsSinglePerson" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:connCommunityAssist %>" 
+        ConnectionString="<%$ ConnectionStrings:CommunityAssistConnectionString %>" 
         SelectCommand="SELECT * FROM [Person] WHERE ([PersonKey] = @PersonKey)"
                 
         UpdateCommand="UPDATE [Person] SET [PersonLastName] = @PersonLastName, [PersonFirstName] = @PersonFirstName, [PersonUsername] = @PersonUsername, [PersonPlainPassword] = @PersonPlainPassword, [Personpasskey] = @Personpasskey, [PersonEntryDate] = @PersonEntryDate WHERE [PersonKey] = @original_PersonKey " 
@@ -78,20 +78,11 @@
             <asp:Parameter Name="PersonPlainPassword" Type="String" />
             <asp:Parameter Name="Personpasskey" Type="Int32" />
             <asp:Parameter DbType="Date" Name="PersonEntryDate" />
-            <asp:Parameter Name="PersonUserPassword" Type="Object" />
             <asp:Parameter Name="original_PersonKey" Type="Int32" />
-            <asp:Parameter Name="original_PersonLastName" Type="String" />
-            <asp:Parameter Name="original_PersonFirstName" Type="String" />
-            <asp:Parameter Name="original_PersonUsername" Type="String" />
-            <asp:Parameter Name="original_PersonPlainPassword" Type="String" />
-            <asp:Parameter Name="original_Personpasskey" Type="Int32" />
-            <asp:Parameter DbType="Date" Name="original_PersonEntryDate" />
-            <asp:Parameter Name="original_PersonUserPassword" Type="Object" />
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:GridView ID="gridAllPerson" runat="server" AllowPaging="True" 
         AutoGenerateColumns="False" DataKeyNames="PersonKey" DataSourceID="dsPerson" 
-        EnableModelValidation="True" 
         onselectedindexchanged="gridAllPerson_SelectedIndexChanged">
         <Columns>
             <asp:CommandField ShowSelectButton="True" />
@@ -113,7 +104,6 @@
     </asp:GridView>
     <asp:FormView ID="fViewPerson" runat="server" DataKeyNames="PersonKey" 
         DataSourceID="dsSinglePerson" DefaultMode="Edit" 
-        EnableModelValidation="True" 
         onitemupdated="fViewPerson_ItemUpdated">
         <EditItemTemplate>
             PersonKey:
